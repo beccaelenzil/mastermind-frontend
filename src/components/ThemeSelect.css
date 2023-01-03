@@ -1,0 +1,9 @@
+.theme-select {
+    display: flex;
+    flex-direction: row;
+    font-size: 0.5 em
+}
+
+.selected {
+    background-color: #008CBA!important;
+}

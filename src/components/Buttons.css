@@ -3,3 +3,9 @@
     border-radius: 50%;
     background-color: lightgrey
 }
+
+.enter-button {
+    margin: 5px;
+    border-radius: 2px;
+    background-color: lightgrey
+}

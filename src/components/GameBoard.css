@@ -1,0 +1,16 @@
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.circle {
+    border-radius: 50%;
+    background-color: rgb(73, 79, 86);
+    padding: 7px;
+    margin: 3px;
+}
+
+.emoji {
+    font-size: 0.5em;
+    color: rgb(73, 79, 86);
+}
