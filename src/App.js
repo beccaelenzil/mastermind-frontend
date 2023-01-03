@@ -84,7 +84,7 @@ function App() {
           themes={Themes} 
           setThemeCallback={setTheme}/> 
           <LevelSelect selectedLevel={level} levels={["easy", "standard", "hard"]} setLevelCallback={updateLevel}/></div>
-: <button onClick={restart}>Start New Game</button>}
+: <div><span>Currently Playing Mastermind  </span><button onClick={restart}>Start New Game</button></div>}
           
       </header>
       <div className="game-body">
