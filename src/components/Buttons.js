@@ -1,12 +1,12 @@
 import './Buttons.css';
 
-const Buttons = ({theme, numKeys, seqNum, updateGameBoardCallback, enterCallback, deleteCallback}) => {
+const Buttons = ({theme, numKeys, seq, updateGameBoardCallback, enterCallback, deleteCallback}) => {
     const emojis = []
     for (let i = 0; i < numKeys; i++) {
         emojis.push(<button 
             key={i} 
             className="emoji-button"
-            onClick={()=>updateGameBoardCallback(theme[i], seqNum, i)}>
+            onClick={()=>updateGameBoardCallback(theme[i], seq, i)}>
                 {theme[i]}</button>)
     }
     emojis.push(<button 

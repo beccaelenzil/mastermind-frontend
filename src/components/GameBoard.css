@@ -4,13 +4,12 @@
 }
 
 .circle {
-    border-radius: 50%;
-    background-color: rgb(73, 79, 86);
-    padding: 7px;
-    margin: 3px;
+    padding-left: 0.3em;
+    padding-right: 0.3em;
+    margin: 0.1em;
 }
 
 .emoji {
-    font-size: 0.5em;
+    font-size: 1em;
     color: rgb(73, 79, 86);
 }

@@ -1,7 +1,9 @@
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  background-color: lightsteelblue;
 }
-
 
 .App-buttons {
   background-color: #282c34;
@@ -15,13 +17,18 @@
 }
 
 .game-body {
-  background-color: lightsteelblue;
-  min-height: 80vh;
+  /* background-color: lightsteelblue; */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  padding: 0.5em;
+  max-height: 100vh
+}
+
+footer {
+  padding: 0.5em
 }
 

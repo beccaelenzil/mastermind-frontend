@@ -15,7 +15,7 @@ function App() {
     for (let i = 0; i<numTurns; i++){
         let row = []
         for (let j = 0; j<codeLength; j++){
-            row.push('iiiii')
+            row.push('⚪')
         }
         board.push(row)
       }
@@ -34,22 +34,27 @@ function App() {
 
 
   const updateGameBoard = (emoji, seq, i) => {
-    const newGameBoard = []
-    for (let i=0; i<numTurns; i++){
-     let newRow = []
-      for (let j=0; j<codeLength; j++){
-        if (i==playNum && j==seq){
-          newRow.push(emoji)
+    if (guess.length < codeLength || (guess.length == codeLength && i == 'delete')){
+      const newGameBoard = []
+      for (let i=0; i<numTurns; i++){
+      let newRow = []
+        for (let j=0; j<codeLength; j++){
+          if (i==playNum && j==seq){
+            newRow.push(emoji)
+          }
+          else {
+            newRow.push(gameBoard[i][j])
+          }
         }
-        else {
-          newRow.push(gameBoard[i][j])
+        newGameBoard.push(newRow)
+        }
+        setGameBoard(newGameBoard)
+        setSeqNum(seqNum+1)
+        if (i != 'delete'){
+          console.log(guess+String(i))
+          setGuess(guess+String(i))
         }
       }
-      newGameBoard.push(newRow)
-      }
-      setGameBoard(newGameBoard)
-      setSeqNum(seqNum+1)
-      setGuess(guess+String(i))
     }
   
     const restart = () => {
@@ -76,10 +81,13 @@ function App() {
     }
     
     const deleteVal = () => {
-      updateGameBoard("iiiii", seqNum-1)
-      setSeqNum(seqNum-1)
-      const newGuess = guess.slice(0,guess.length-1)
-      setGuess(newGuess)
+      if (seqNum > 0){
+        updateGameBoard("⚪", seqNum-1, 'delete')
+        setSeqNum(seqNum-1)
+        const newGuess = guess.slice(0,guess.length-1)
+        console.log(newGuess)
+        setGuess(newGuess)
+      }
     }
 
     const enter = () => {
@@ -111,11 +119,12 @@ function App() {
       <Buttons 
       theme={Themes[theme]}
       numKeys={numKeys}
-      seqNum={seqNum}
+      seq={seqNum}
       updateGameBoardCallback={updateGameBoard}
       enterCallback={enter}
       deleteCallback={deleteVal}/>
       </div>
+      <footer>Becca Elenzil - Reach Backend Apprenticeship - Take Home Project - January 2023</footer>
     </div>
   );
 }
