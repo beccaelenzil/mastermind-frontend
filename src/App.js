@@ -22,6 +22,7 @@ function App() {
     return board
   }
 
+  const [guess, setGuess] = useState('')
   const [theme, setTheme] = useState("hearts")
   const [level, setLevel] = useState("standard")
   const [playNum, setPlayNum] = useState(0)
@@ -31,13 +32,13 @@ function App() {
   const [codeLength, setCodeLength] = useState(4)
   const [gameBoard, setGameBoard] = useState(makeGameBoard(codeLength, numTurns))
 
-  const updateGameBoard = (emoji) => {
-    
+
+  const updateGameBoard = (emoji, seq, i) => {
     const newGameBoard = []
     for (let i=0; i<numTurns; i++){
      let newRow = []
       for (let j=0; j<codeLength; j++){
-        if (i==playNum && j==seqNum){
+        if (i==playNum && j==seq){
           newRow.push(emoji)
         }
         else {
@@ -48,6 +49,7 @@ function App() {
       }
       setGameBoard(newGameBoard)
       setSeqNum(seqNum+1)
+      setGuess(guess+String(i))
     }
   
     const restart = () => {
@@ -72,7 +74,22 @@ function App() {
         setGameBoard(makeGameBoard(6,numTurns))
       }
     }
+    
+    const deleteVal = () => {
+      updateGameBoard("iiiii", seqNum-1)
+      setSeqNum(seqNum-1)
+      const newGuess = guess.slice(0,guess.length-1)
+      setGuess(newGuess)
+    }
 
+    const enter = () => {
+      if (guess.length == codeLength){
+        setPlayNum(playNum+1); 
+        setSeqNum(0); 
+        setGuess('')
+        console.log(guess)
+      }
+    }
 
 
   return (
@@ -94,9 +111,10 @@ function App() {
       <Buttons 
       theme={Themes[theme]}
       numKeys={numKeys}
+      seqNum={seqNum}
       updateGameBoardCallback={updateGameBoard}
-      enterCallback={()=>{setPlayNum(playNum+1); setSeqNum(0)}}/>   
-      
+      enterCallback={enter}
+      deleteCallback={deleteVal}/>
       </div>
     </div>
   );
