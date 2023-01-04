@@ -5,7 +5,7 @@ import LevelSelect from "./components/LevelSelect.js";
 import GameBoard from "./components/GameBoard.js";
 import Themes from "./Constants.js";
 import { useState, useEffect } from "react";
-import { isCompositeComponent } from "react-dom/test-utils";
+import axios from "axios";
 
 function App() {
   const makeGameBoard = (codeLength, numTurns) => {
@@ -33,6 +33,45 @@ function App() {
   const [gameBoard, setGameBoard] = useState(
     makeGameBoard(codeLength, numTurns)
   );
+  const [gameId, setGameId] = useState(0);
+  const [levelInfo, setLevelInfo] = useState({});
+  const [win, setWin] = useState(false);
+  const [code, setCode] = useState("XXXX");
+
+  const URL = "http://127.0.0.1:5000/";
+
+  useEffect(() => {
+    axios
+      .get(URL + "levels/")
+      .then((response) => setLevelInfo(response.data))
+      .catch((err) => console.log(err.response.data));
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(URL + "games/" + gameId)
+      .then((response) => {
+        setCode(response.data.code);
+        console.log(response.data.code);
+      })
+      .catch((err) => console.log(err.response.data));
+  }, [gameId]);
+
+  const scorePlayAPI = () => {
+    console.log(gameId);
+    axios
+      .post(URL + "plays/", { code: guess, level: level, game_id: gameId })
+      .then((response) => {
+        scorePlay(response.data.correct_nums, response.data.correct_pos);
+        if (gameId == 0) {
+          setGameId(response.data.game_id);
+        }
+        if (response.data.win == true) {
+          setWin(true);
+        }
+      })
+      .catch((err) => console.log(err.response.data));
+  };
 
   const scorePlay = (count_num, count_pos) => {
     const rowLength = gameBoard[0].length;
@@ -52,7 +91,6 @@ function App() {
     }
 
     setGameBoard(newGameBoard);
-    console.log("scorePlay");
   };
 
   const updateGameBoard = (emoji, seq, i) => {
@@ -86,23 +124,21 @@ function App() {
     setSeqNum(0);
     setGuess("");
     setGameBoard(makeGameBoard(codeLength, numTurns));
+    setWin(false);
+    setGameId(null);
+    setCode("XXXX");
   };
 
   const updateLevel = (newLevel) => {
     setLevel(newLevel);
-    if (newLevel == "easy") {
-      setNumKeys(4);
-      setCodeLength(4);
-      setGameBoard(makeGameBoard(4, numTurns));
-    } else if (newLevel == "standard") {
-      setNumKeys(8);
-      setCodeLength(4);
-      setGameBoard(makeGameBoard(4, numTurns));
-    } else if (newLevel == "hard") {
-      setNumKeys(10);
-      setCodeLength(6);
-      setGameBoard(makeGameBoard(6, numTurns));
-    }
+    setNumKeys(levelInfo[newLevel]["max"] + 1);
+    setCodeLength(levelInfo[newLevel]["num"]);
+    setGameBoard(
+      makeGameBoard(
+        levelInfo[newLevel]["num"],
+        levelInfo[newLevel]["max_guesses"]
+      )
+    );
   };
 
   const deleteVal = () => {
@@ -115,17 +151,25 @@ function App() {
   };
 
   const enter = () => {
-    if (guess.length == codeLength) {
+    if (guess.length == codeLength && playNum < numTurns) {
+      scorePlayAPI();
       setPlayNum(playNum + 1);
       setSeqNum(0);
       setGuess("");
-      scorePlay("1", "2");
     }
+  };
+
+  const displayCode = () => {
+    let emojiCode = "";
+    for (let char of code) {
+      emojiCode += Themes[theme][char];
+    }
+    return emojiCode;
   };
 
   return (
     <div className="App">
-      <header className="App-buttons">
+      <header className="App-buttons" id="App-heading">
         {seqNum == 0 && playNum == 0 ? (
           <div>
             <ThemeSelect
@@ -135,7 +179,7 @@ function App() {
             />
             <LevelSelect
               selectedLevel={level}
-              levels={["easy", "standard", "hard"]}
+              levels={Object.keys(levelInfo)}
               setLevelCallback={updateLevel}
             />
           </div>
@@ -152,9 +196,15 @@ function App() {
             </button>
           </div>
         )}
+        {win ? <h1>YOU WON!</h1> : ""}
+        {playNum == numTurns && win == false ? (
+          <h1>You ran out of turns! The code was: {displayCode()}</h1>
+        ) : (
+          ""
+        )}
       </header>
       <div className="game-body">
-        <GameBoard gameBoard={gameBoard} />
+        <GameBoard gameBoard={gameBoard} playNum={playNum} />
       </div>
       <div className="App-buttons">
         <Buttons

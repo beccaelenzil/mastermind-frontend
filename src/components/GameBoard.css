@@ -1,6 +1,12 @@
 .row {
     display: flex;
     flex-direction: row;
+    padding: 0.2em
+}
+
+.selected-row {
+    background-color: rgb(81, 120, 178);
+    border-radius: 1em
 }
 
 .circle {

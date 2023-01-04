@@ -1,11 +1,12 @@
 import "./GameBoard.css";
 
-const GameBoard = ({ gameBoard }) => {
+const GameBoard = ({ gameBoard, playNum }) => {
   const numTurns = gameBoard.length;
   const codeLength = gameBoard[0].length;
 
   let board = [];
   for (let i = 0; i < numTurns; i++) {
+    const className = playNum == i ? "row selected-row" : "row";
     let row = [];
     for (let j = 0; j < codeLength; j++) {
       row.push(
@@ -15,7 +16,7 @@ const GameBoard = ({ gameBoard }) => {
       );
     }
     board.push(
-      <div key={1000 + i} className="row">
+      <div key={1000 + i} className={className}>
         {row}
       </div>
     );
