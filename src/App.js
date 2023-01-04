@@ -33,8 +33,11 @@ function App() {
   const [gameBoard, setGameBoard] = useState(makeGameBoard(codeLength, numTurns))
 
 
+  const scorePlay = () => {
+    console.log("scorePlay")
+  }
+
   const updateGameBoard = (emoji, seq, i) => {
-    console.log(guess)
     if (guess.length < codeLength || (guess.length == codeLength && i == 'delete')){
       const newGameBoard = []
       for (let i=0; i<numTurns; i++){
@@ -52,7 +55,6 @@ function App() {
         setGameBoard(newGameBoard)
         setSeqNum(seqNum+1)
         if (i != 'delete'){
-          console.log(guess+String(i))
           setGuess(guess+String(i))
         }
       }
@@ -87,7 +89,6 @@ function App() {
         updateGameBoard("⚪", seqNum-1, 'delete')
         setSeqNum(seqNum-1)
         const newGuess = guess.slice(0,guess.length-1)
-        console.log(newGuess)
         setGuess(newGuess)
       }
     }
@@ -97,7 +98,7 @@ function App() {
         setPlayNum(playNum+1); 
         setSeqNum(0); 
         setGuess('')
-        console.log(guess)
+        scorePlay()
       }
     }
 
@@ -111,7 +112,7 @@ function App() {
           themes={Themes} 
           setThemeCallback={setTheme}/> 
           <LevelSelect selectedLevel={level} levels={["easy", "standard", "hard"]} setLevelCallback={updateLevel}/></div>
-: <div><span>Currently Playing Mastermind  </span><button onClick={restart}>Start New Game</button></div>}
+: <div><h1>Currently Playing Mastermind</h1><h2>Level: <span className="smaller">{level}</span>, Theme: <span className="smaller">{Themes[theme][0]}s</span>, Play Number: <span className="smaller">{playNum+1}</span></h2><button className="new-game-button" onClick={restart}>Start New Game</button></div>}
           
       </header>
       <div className="game-body">

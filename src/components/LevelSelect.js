@@ -15,7 +15,7 @@ const LevelSelect = ({levels, selectedLevel, setLevelCallback}) => {
         num += 1
     }
 
-    return <div className="theme-select"><span>Select Level: </span><nav>{levelButtons}</nav></div>
+    return <div className="theme-select"><h1 id="label">Select Level: </h1><nav>{levelButtons}</nav></div>
 
 }
 

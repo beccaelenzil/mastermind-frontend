@@ -1,7 +1,12 @@
 .theme-select {
     display: flex;
     flex-direction: row;
-    font-size: 0.5 em
+    font-size: 0.3 em;
+}
+
+#label {
+    text-transform: uppercase;
+    font-size: 0.6em
 }
 
 .selected {

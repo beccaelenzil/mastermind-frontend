@@ -16,7 +16,7 @@ const ThemeSelect = ({selectedTheme, themes, setThemeCallback}) => {
         num += 1
     }
 
-    return <div className="theme-select"><span>Select Theme: </span><nav>{emojis}</nav></div>
+    return <div className="theme-select"><h1 id="label">Select Theme: </h1><nav>{emojis}</nav></div>
 
 }
 

@@ -32,3 +32,19 @@ footer {
   padding: 0.5em
 }
 
+.new-game-button {
+  margin: 1em
+}
+
+h1 {
+  font-size: 0.7em
+}
+
+h2 {
+  font-size: 0.6em
+}
+
+.smaller {
+  text-transform: uppercase;
+  color: lightblue
+}
