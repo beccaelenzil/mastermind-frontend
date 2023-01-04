@@ -34,6 +34,7 @@ function App() {
 
 
   const updateGameBoard = (emoji, seq, i) => {
+    console.log(guess)
     if (guess.length < codeLength || (guess.length == codeLength && i == 'delete')){
       const newGameBoard = []
       for (let i=0; i<numTurns; i++){
@@ -60,6 +61,7 @@ function App() {
     const restart = () => {
       setPlayNum(0)
       setSeqNum(0)
+      setGuess('')
       setGameBoard(makeGameBoard(codeLength, numTurns))
     }
 
