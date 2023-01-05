@@ -68,6 +68,9 @@ function App() {
         }
         if (response.data.win == true) {
           setWin(true);
+          setPlayNum(numTurns + 1);
+        } else if (response.data.win == false && playNum == numTurns) {
+          setPlayNum(numTurns + 1);
         }
       })
       .catch((err) => console.log(err.response.data));
@@ -125,7 +128,7 @@ function App() {
     setGuess("");
     setGameBoard(makeGameBoard(codeLength, numTurns));
     setWin(false);
-    setGameId(null);
+    setGameId(0);
     setCode("XXXX");
   };
 
@@ -187,9 +190,16 @@ function App() {
           <div>
             <h1>Currently Playing Mastermind</h1>
             <h2>
-              Level: <span className="smaller">{level}</span>, Theme:{" "}
-              <span className="smaller">{Themes[theme][0]}s</span>, Play Number:{" "}
-              <span className="smaller">{playNum + 1}</span>
+              <p>
+                Level: <span className="smaller">{level}</span>
+              </p>
+              {playNum < numTurns ? (
+                <p>
+                  Play Number: <span className="smaller">{playNum + 1}</span>
+                </p>
+              ) : (
+                ""
+              )}
             </h2>
             <button className="new-game-button" onClick={restart}>
               Start New Game
