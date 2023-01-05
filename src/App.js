@@ -175,6 +175,7 @@ function App() {
       <header className="App-buttons" id="App-heading">
         {seqNum == 0 && playNum == 0 ? (
           <div>
+            <h1>Welcome to MASTERMIND</h1>
             <ThemeSelect
               selectedTheme={theme}
               themes={Themes}
@@ -188,7 +189,7 @@ function App() {
           </div>
         ) : (
           <div>
-            <h1>Currently Playing Mastermind</h1>
+            <h1>Currently Playing MASTERMIND</h1>
             <h2>
               <p>
                 Level: <span className="smaller">{level}</span>

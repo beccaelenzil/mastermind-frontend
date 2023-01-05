@@ -15,6 +15,7 @@ const GameBoard = ({ gameBoard, playNum }) => {
         </div>
       );
     }
+
     board.push(
       <div key={1000 + i} className={className}>
         {row}
