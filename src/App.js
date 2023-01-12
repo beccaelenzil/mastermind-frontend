@@ -2,13 +2,14 @@ import "./App.css";
 import CodeButtons from "./components/CodeButtons.js";
 import ThemeSelect from "./components/ThemeSelect.js";
 import GameBoard from "./components/GameBoard.js";
-import Themes from "./Constants.js";
+import Themes from "./Themes.js";
+import Constants from "./Constants.js";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import GameHeader from "./components/GameHeader";
 
 function App() {
-  const URL = "https://becca-mastermind.herokuapp.com/";
+  const URL = Constants.url;
 
   const makeGameBoard = (codeLength, numTurns) => {
     let board = [];
@@ -54,7 +55,9 @@ function App() {
     axios
       .get(URL + "games/" + gameId)
       .then((response) => {
-        setCode(response.data.code);
+        if (response.status == 200) {
+          setCode(response.data.code);
+        }
       })
       .catch((err) => console.log(err.response.data));
   }, [gameId]);
@@ -108,6 +111,13 @@ function App() {
       newGameBoard.push(newRow);
     }
     setGameBoard(newGameBoard);
+  };
+
+  const googleLogin = () => {
+    axios
+      .get(URL + "login")
+      .then((response) => console.log(response.data))
+      .catch((err) => console.log(err));
   };
 
   const updateSymbols = (emoji, seq, i) => {
@@ -197,6 +207,7 @@ function App() {
           win={win}
           code={code}
         />
+        <button onClick={googleLogin}>Google Login</button>
       </header>
       <div className="game-body">
         <GameBoard gameBoard={gameBoard} playNum={playNum} />
