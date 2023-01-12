@@ -61,7 +61,7 @@ function App() {
   }, [gameId]);
 
   useEffect(() => {
-    const url = `${URL}users`;
+    const url = `${URL}users/login`;
     console.log(url);
     axios
       .post(url, { email: email })
