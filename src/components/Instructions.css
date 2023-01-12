@@ -3,8 +3,8 @@
 }
 
 #rules {
-    margin-left: 1em;
-    margin-right: 1em;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
     color: black;
     background-color:#008CBA!important;
     border-radius: 1em
@@ -26,7 +26,7 @@
 }
 
 .example {
-    max-width: 20vw;
+    max-width: 25vw;
     margin: 1em;
     border-radius: 1em;
     border: black
