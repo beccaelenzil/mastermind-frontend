@@ -1,15 +1,18 @@
 {
   "files": {
-    "main.css": "/mastermind-frontend/static/css/main.2286e320.css",
-    "main.js": "/mastermind-frontend/static/js/main.b87a1f50.js",
+    "main.css": "/mastermind-frontend/static/css/main.a08135e7.css",
+    "main.js": "/mastermind-frontend/static/js/main.aa58cf16.js",
     "static/js/787.40b505df.chunk.js": "/mastermind-frontend/static/js/787.40b505df.chunk.js",
+    "static/media/faces.jpeg": "/mastermind-frontend/static/media/faces.aa645456e42a2e7d06a0.jpeg",
+    "static/media/hearts.jpeg": "/mastermind-frontend/static/media/hearts.5b1d04334cef9e69efe5.jpeg",
+    "static/media/animals.jpeg": "/mastermind-frontend/static/media/animals.5b39dd4928fbc30e6c97.jpeg",
     "index.html": "/mastermind-frontend/index.html",
-    "main.2286e320.css.map": "/mastermind-frontend/static/css/main.2286e320.css.map",
-    "main.b87a1f50.js.map": "/mastermind-frontend/static/js/main.b87a1f50.js.map",
+    "main.a08135e7.css.map": "/mastermind-frontend/static/css/main.a08135e7.css.map",
+    "main.aa58cf16.js.map": "/mastermind-frontend/static/js/main.aa58cf16.js.map",
     "787.40b505df.chunk.js.map": "/mastermind-frontend/static/js/787.40b505df.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.2286e320.css",
-    "static/js/main.b87a1f50.js"
+    "static/css/main.a08135e7.css",
+    "static/js/main.aa58cf16.js"
   ]
 }
