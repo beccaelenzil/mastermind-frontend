@@ -1,10 +1,9 @@
 .toggle-button {
-    margin: 5px
+    margin: 0.2em;
 }
 
 #rules {
-    margin-left: 0.5em;
-    margin-right: 0.5em;
+    margin: 0.5em;
     color: black;
     background-color:#008CBA!important;
     border-radius: 1em

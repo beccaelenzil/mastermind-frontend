@@ -5,7 +5,7 @@ import animals from "../assets/animals.jpeg";
 import hearts from "../assets/hearts.jpeg";
 
 const Instructions = () => {
-  const [display, setDisplay] = useState(true);
+  const [display, setDisplay] = useState(false);
 
   return (
     <div>
@@ -18,7 +18,6 @@ const Instructions = () => {
           Hide Game Rules
         </button>
       )}
-
       {display ? (
         <section id="rules" className="game-body">
           <h1 id="rules-title">Game Rules</h1>
