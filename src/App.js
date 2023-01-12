@@ -26,8 +26,8 @@ function App() {
     return board;
   };
 
+  const [performance, setPerformance] = useState({});
   const [guess, setGuess] = useState("");
-  const [displayRules, setDisplayRules] = useState(false);
   const [email, setEmail] = useState("");
   const [userId, setUserId] = useState(null);
   const [theme, setTheme] = useState("hearts");
@@ -44,6 +44,7 @@ function App() {
   const [levelInfo, setLevelInfo] = useState({});
   const [win, setWin] = useState(false);
   const [code, setCode] = useState("XXXX");
+  const [gameNum, setGameNum] = useState(0);
 
   useEffect(() => {
     axios
@@ -72,6 +73,15 @@ function App() {
       })
       .catch((err) => console.log(err));
   }, [email]);
+
+  useEffect(() => {
+    axios
+      .get(`${URL}users/${userId}`)
+      .then((response) => {
+        setPerformance(response.data["performance summary"]);
+      })
+      .catch((err) => console.log(err));
+  }, [userId, gameNum]);
 
   const getCodeScore = () => {
     axios
@@ -149,6 +159,7 @@ function App() {
     setWin(false);
     setGameId(0);
     setCode("XXXX");
+    setGameNum(gameNum + 1);
   };
 
   const updateLevel = (newLevel) => {
@@ -200,6 +211,7 @@ function App() {
         ThemeSelect={ThemeSelect}
         win={win}
         code={code}
+        performance={performance}
       />
 
       <Instructions />

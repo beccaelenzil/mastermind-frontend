@@ -1,5 +1,6 @@
 import LevelSelect from "./LevelSelect.js";
 import LoginForm from "./LoginForm.js";
+import Performance from "./Performance.js";
 import Display from "../utils/DisplayFunctions.js";
 import "./GameHeader.css";
 
@@ -19,6 +20,7 @@ const GameHeader = ({
   ThemeSelect,
   win,
   code,
+  performance,
 }) => {
   return (
     <header className="App-buttons" id="App-heading">
@@ -62,6 +64,7 @@ const GameHeader = ({
       {email != "" && playNum == 0 && seqNum == 0 ? (
         <div>
           <h1>Logged in as {email}</h1>
+          <Performance performance={performance} />
           <button onClick={() => setEmail("")}>Logout</button>
         </div>
       ) : (

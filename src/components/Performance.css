@@ -1,0 +1,11 @@
+.stats {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; 
+    background-color:#008CBA;
+    border-radius: 0.5em
+}
+
+.stat {
+    margin: 0.5em
+}
