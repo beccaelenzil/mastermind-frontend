@@ -6,6 +6,7 @@ import GameBoard from "./components/GameBoard.js";
 import Themes from "./Constants.js";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import LoginForm from "./components/LoginForm";
 
 function App() {
   const makeGameBoard = (codeLength, numTurns) => {
@@ -23,6 +24,8 @@ function App() {
   };
 
   const [guess, setGuess] = useState("");
+  const [email, setEmail] = useState("");
+  const [userId, setUserId] = useState(null);
   const [theme, setTheme] = useState("hearts");
   const [level, setLevel] = useState("standard");
   const [playNum, setPlayNum] = useState(0);
@@ -57,10 +60,27 @@ function App() {
       .catch((err) => console.log(err.response.data));
   }, [gameId]);
 
+  useEffect(() => {
+    const url = `${URL}users/email/${email}`;
+    console.log(url);
+    axios
+      .get(url)
+      .then((response) => {
+        console.log(response.data);
+        setUserId(response.data.user_id);
+      })
+      .catch((err) => console.log(err));
+  }, [email]);
+
   const scorePlayAPI = () => {
     console.log(gameId);
     axios
-      .post(URL + "plays/", { code: guess, level: level, game_id: gameId })
+      .post(URL + "plays/", {
+        code: guess,
+        level: level,
+        game_id: gameId,
+        user_id: userId,
+      })
       .then((response) => {
         scorePlay(response.data.correct_nums, response.data.correct_pos);
         if (gameId == 0) {
@@ -206,6 +226,19 @@ function App() {
               Start New Game
             </button>
           </div>
+        )}
+        {email != "" && playNum == 0 && seqNum == 0 ? (
+          <div>
+            <h1>Logged in as {email}</h1>
+            <button onClick={() => setEmail("")}>Logout</button>
+          </div>
+        ) : (
+          ""
+        )}
+        {email == "" && playNum == 0 && seqNum == 0 ? (
+          <LoginForm setEmailCallback={setEmail} />
+        ) : (
+          ""
         )}
         {win ? <h1>YOU WON!</h1> : ""}
         {playNum == numTurns && win == false ? (
