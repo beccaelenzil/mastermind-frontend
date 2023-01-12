@@ -1,0 +1,33 @@
+.toggle-button {
+    margin: 5px
+}
+
+#rules {
+    margin-left: 1em;
+    margin-right: 1em;
+    color: black;
+    background-color:#008CBA!important;
+    border-radius: 1em
+}
+
+#rules-text {
+    margin-left: 1.2em;
+    margin-right: 1.2em;
+    font-size: 0.7em
+}
+
+#rules-title{
+    margin: 0.1em
+}
+
+.example-games {
+    display: flex;
+    flex-direction: row;
+}
+
+.example {
+    max-width: 20vw;
+    margin: 1em;
+    border-radius: 1em;
+    border: black
+}

@@ -1,6 +1,7 @@
 import "./App.css";
 import CodeButtons from "./components/CodeButtons.js";
 import ThemeSelect from "./components/ThemeSelect.js";
+import Instructions from "./components/Instructions.js";
 import GameBoard from "./components/GameBoard.js";
 import Themes from "./Themes.js";
 import Constants from "./Constants.js";
@@ -26,6 +27,7 @@ function App() {
   };
 
   const [guess, setGuess] = useState("");
+  const [displayRules, setDisplayRules] = useState(false);
   const [email, setEmail] = useState("");
   const [userId, setUserId] = useState(null);
   const [theme, setTheme] = useState("hearts");
@@ -182,28 +184,26 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-buttons" id="App-heading">
-        <GameHeader
-          Themes={Themes}
-          theme={theme}
-          setTheme={setTheme}
-          level={level}
-          levelInfo={levelInfo}
-          updateLevel={updateLevel}
-          playNum={playNum}
-          numTurns={numTurns}
-          restart={restart}
-          email={email}
-          setEmail={setEmail}
-          seqNum={seqNum}
-          ThemeSelect={ThemeSelect}
-          win={win}
-          code={code}
-        />
-      </header>
-      <div className="game-body">
-        <GameBoard gameBoard={gameBoard} playNum={playNum} />
-      </div>
+      <GameHeader
+        Themes={Themes}
+        theme={theme}
+        setTheme={setTheme}
+        level={level}
+        levelInfo={levelInfo}
+        updateLevel={updateLevel}
+        playNum={playNum}
+        numTurns={numTurns}
+        restart={restart}
+        email={email}
+        setEmail={setEmail}
+        seqNum={seqNum}
+        ThemeSelect={ThemeSelect}
+        win={win}
+        code={code}
+      />
+
+      <Instructions />
+      <GameBoard gameBoard={gameBoard} playNum={playNum} />
       <div className="App-buttons">
         <CodeButtons
           theme={Themes[theme]}

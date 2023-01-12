@@ -20,7 +20,7 @@ const GameHeader = ({
   code,
 }) => {
   return (
-    <div>
+    <header className="App-buttons" id="App-heading">
       {seqNum == 0 && playNum == 0 ? (
         <div>
           <h1>Welcome to MASTERMIND</h1>
@@ -77,7 +77,7 @@ const GameHeader = ({
       ) : (
         ""
       )}
-    </div>
+    </header>
   );
 };
 

@@ -22,7 +22,7 @@ const GameBoard = ({ gameBoard, playNum }) => {
       </div>
     );
   }
-  return <div>{board}</div>;
+  return <div className="game-body">{board}</div>;
 };
 
 export default GameBoard;
