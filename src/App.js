@@ -61,19 +61,18 @@ function App() {
   }, [gameId]);
 
   useEffect(() => {
-    const url = `${URL}users/email/${email}`;
+    const url = `${URL}users`;
     console.log(url);
     axios
-      .get(url)
+      .post(url, { email: email })
       .then((response) => {
         console.log(response.data);
-        setUserId(response.data.user_id);
+        setUserId(response.data.uid);
       })
       .catch((err) => console.log(err));
   }, [email]);
 
   const scorePlayAPI = () => {
-    console.log(gameId);
     axios
       .post(URL + "plays/", {
         code: guess,
