@@ -6,7 +6,7 @@ const LevelSelect = ({ levels, selectedLevel, setLevelCallback }) => {
   const levelButtons = [];
   for (const level of levels) {
     const className =
-      level == selectedLevel ? "emoji-button selected" : "emoji-button";
+      level == selectedLevel ? "emoji-button selected nav" : "emoji-button nav";
     levelButtons.push(
       <button
         key={num}

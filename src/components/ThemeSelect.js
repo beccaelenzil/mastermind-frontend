@@ -7,7 +7,7 @@ const ThemeSelect = ({ selectedTheme, themes, setThemeCallback }) => {
 
   for (const theme in themes) {
     const className =
-      theme == selectedTheme ? "emoji-button selected" : "emoji-button";
+      theme == selectedTheme ? "emoji-button nav selected" : "emoji-button nav";
     emojis.push(
       <button
         key={num}
