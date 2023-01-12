@@ -1,14 +1,15 @@
 import "./App.css";
-import Buttons from "./components/Buttons.js";
+import CodeButtons from "./components/CodeButtons.js";
 import ThemeSelect from "./components/ThemeSelect.js";
-import LevelSelect from "./components/LevelSelect.js";
 import GameBoard from "./components/GameBoard.js";
 import Themes from "./Constants.js";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import LoginForm from "./components/LoginForm";
+import GameHeader from "./components/GameHeader";
 
 function App() {
+  const URL = "https://becca-mastermind.herokuapp.com/";
+
   const makeGameBoard = (codeLength, numTurns) => {
     let board = [];
     for (let i = 0; i < numTurns; i++) {
@@ -41,8 +42,6 @@ function App() {
   const [win, setWin] = useState(false);
   const [code, setCode] = useState("XXXX");
 
-  const URL = "http://127.0.0.1:5000/";
-
   useEffect(() => {
     axios
       .get(URL + "levels/")
@@ -50,29 +49,26 @@ function App() {
       .catch((err) => console.log(err.response.data));
   }, []);
 
+  //TODO: refactor using useRef so it doesn't run on initial render
   useEffect(() => {
     axios
       .get(URL + "games/" + gameId)
       .then((response) => {
         setCode(response.data.code);
-        console.log(response.data.code);
       })
       .catch((err) => console.log(err.response.data));
   }, [gameId]);
 
   useEffect(() => {
-    const url = `${URL}users/login`;
-    console.log(url);
     axios
-      .post(url, { email: email })
+      .post(URL + "users/login", { email: email })
       .then((response) => {
-        console.log(response.data);
         setUserId(response.data.uid);
       })
       .catch((err) => console.log(err));
   }, [email]);
 
-  const scorePlayAPI = () => {
+  const getCodeScore = () => {
     axios
       .post(URL + "plays/", {
         code: guess,
@@ -111,11 +107,10 @@ function App() {
       }
       newGameBoard.push(newRow);
     }
-
     setGameBoard(newGameBoard);
   };
 
-  const updateGameBoard = (emoji, seq, i) => {
+  const updateSymbols = (emoji, seq, i) => {
     const rowLength = gameBoard[0].length;
     if (
       guess.length < codeLength ||
@@ -154,6 +149,7 @@ function App() {
   const updateLevel = (newLevel) => {
     setLevel(newLevel);
     setNumKeys(levelInfo[newLevel]["max"] + 1);
+    setNumTurns(levelInfo[newLevel]["max_guesses"]);
     setCodeLength(levelInfo[newLevel]["num"]);
     setGameBoard(
       makeGameBoard(
@@ -163,106 +159,59 @@ function App() {
     );
   };
 
-  const deleteVal = () => {
+  const deleteSymbol = () => {
     if (seqNum > 0) {
-      updateGameBoard("⚪", seqNum - 1, "delete");
+      updateSymbols("⚪", seqNum - 1, "delete");
       setSeqNum(seqNum - 1);
       const newGuess = guess.slice(0, guess.length - 1);
       setGuess(newGuess);
     }
   };
 
-  const enter = () => {
+  const enterCode = () => {
     if (guess.length == codeLength && playNum < numTurns) {
-      scorePlayAPI();
+      getCodeScore();
       setPlayNum(playNum + 1);
       setSeqNum(0);
       setGuess("");
     }
   };
 
-  const displayCode = () => {
-    let emojiCode = "";
-    for (let char of code) {
-      emojiCode += Themes[theme][char];
-    }
-    return emojiCode;
-  };
-
   return (
     <div className="App">
       <header className="App-buttons" id="App-heading">
-        {seqNum == 0 && playNum == 0 ? (
-          <div>
-            <h1>Welcome to MASTERMIND</h1>
-            <ThemeSelect
-              selectedTheme={theme}
-              themes={Themes}
-              setThemeCallback={setTheme}
-            />
-            <LevelSelect
-              selectedLevel={level}
-              levels={Object.keys(levelInfo)}
-              setLevelCallback={updateLevel}
-            />
-          </div>
-        ) : (
-          <div>
-            <h1>Currently Playing MASTERMIND</h1>
-            <h2>
-              <p>
-                Level: <span className="smaller">{level}</span>
-              </p>
-              {playNum < numTurns ? (
-                <p>
-                  Play Number: <span className="smaller">{playNum + 1}</span>
-                </p>
-              ) : (
-                ""
-              )}
-            </h2>
-            <button className="new-game-button" onClick={restart}>
-              Start New Game
-            </button>
-          </div>
-        )}
-        {email != "" && playNum == 0 && seqNum == 0 ? (
-          <div>
-            <h1>Logged in as {email}</h1>
-            <button onClick={() => setEmail("")}>Logout</button>
-          </div>
-        ) : (
-          ""
-        )}
-        {email == "" && playNum == 0 && seqNum == 0 ? (
-          <LoginForm setEmailCallback={setEmail} />
-        ) : (
-          ""
-        )}
-        {win ? <h1>YOU WON!</h1> : ""}
-        {playNum == numTurns && win == false ? (
-          <h1>You ran out of turns! The code was: {displayCode()}</h1>
-        ) : (
-          ""
-        )}
+        <GameHeader
+          Themes={Themes}
+          theme={theme}
+          setTheme={setTheme}
+          level={level}
+          levelInfo={levelInfo}
+          updateLevel={updateLevel}
+          playNum={playNum}
+          numTurns={numTurns}
+          restart={restart}
+          email={email}
+          setEmail={setEmail}
+          seqNum={seqNum}
+          ThemeSelect={ThemeSelect}
+          win={win}
+          code={code}
+        />
       </header>
       <div className="game-body">
         <GameBoard gameBoard={gameBoard} playNum={playNum} />
       </div>
       <div className="App-buttons">
-        <Buttons
+        <CodeButtons
           theme={Themes[theme]}
           numKeys={numKeys}
           seq={seqNum}
-          updateGameBoardCallback={updateGameBoard}
-          enterCallback={enter}
-          deleteCallback={deleteVal}
+          updateGameBoardCallback={updateSymbols}
+          enterCallback={enterCode}
+          deleteCallback={deleteSymbol}
         />
       </div>
-      <footer>
-        Becca Elenzil - Reach Backend Apprenticeship - Take Home Project -
-        January 2023
-      </footer>
+      <footer>Becca Elenzil - January 2023</footer>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import "./Buttons.css";
 
-const Buttons = ({
+const CodeButtons = ({
   theme,
   numKeys,
   seq,
@@ -35,4 +35,4 @@ const Buttons = ({
   return <div>{emojis}</div>;
 };
 
-export default Buttons;
+export default CodeButtons;
