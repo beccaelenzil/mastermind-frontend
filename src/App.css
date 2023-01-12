@@ -30,7 +30,7 @@
   font-size: calc(10px + 2vmin);
   color: white;
   padding: 0.5em;
-  max-height: 100vh
+  /* max-height: 100vh */
 }
 
 footer {

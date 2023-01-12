@@ -22,10 +22,11 @@
 .example-games {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .example {
-    max-width: 25vw;
+    max-height: 50vh;
     margin: 1em;
     border-radius: 1em;
     border: black
