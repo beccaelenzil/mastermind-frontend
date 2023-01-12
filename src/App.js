@@ -113,13 +113,6 @@ function App() {
     setGameBoard(newGameBoard);
   };
 
-  const googleLogin = () => {
-    axios
-      .get(URL + "login")
-      .then((response) => console.log(response.data))
-      .catch((err) => console.log(err));
-  };
-
   const updateSymbols = (emoji, seq, i) => {
     const rowLength = gameBoard[0].length;
     if (
@@ -207,7 +200,6 @@ function App() {
           win={win}
           code={code}
         />
-        <button onClick={googleLogin}>Google Login</button>
       </header>
       <div className="game-body">
         <GameBoard gameBoard={gameBoard} playNum={playNum} />
