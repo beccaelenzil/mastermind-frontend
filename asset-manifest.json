@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.67b9132b.css",
-    "main.js": "/static/js/main.49840966.js",
-    "static/js/787.40b505df.chunk.js": "/static/js/787.40b505df.chunk.js",
-    "index.html": "/index.html",
-    "main.67b9132b.css.map": "/static/css/main.67b9132b.css.map",
-    "main.49840966.js.map": "/static/js/main.49840966.js.map",
-    "787.40b505df.chunk.js.map": "/static/js/787.40b505df.chunk.js.map"
+    "main.css": "/mastermind-frontend/static/css/main.67b9132b.css",
+    "main.js": "/mastermind-frontend/static/js/main.cfa63775.js",
+    "static/js/787.40b505df.chunk.js": "/mastermind-frontend/static/js/787.40b505df.chunk.js",
+    "index.html": "/mastermind-frontend/index.html",
+    "main.67b9132b.css.map": "/mastermind-frontend/static/css/main.67b9132b.css.map",
+    "main.cfa63775.js.map": "/mastermind-frontend/static/js/main.cfa63775.js.map",
+    "787.40b505df.chunk.js.map": "/mastermind-frontend/static/js/787.40b505df.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.67b9132b.css",
-    "static/js/main.49840966.js"
+    "static/js/main.cfa63775.js"
   ]
 }
