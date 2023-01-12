@@ -1,6 +1,7 @@
 import LevelSelect from "./LevelSelect.js";
 import LoginForm from "./LoginForm.js";
 import Display from "../utils/DisplayFunctions.js";
+import "./GameHeader.css";
 
 const GameHeader = ({
   Themes,
@@ -24,6 +25,9 @@ const GameHeader = ({
       {seqNum == 0 && playNum == 0 ? (
         <div>
           <h1>Welcome to MASTERMIND</h1>
+          <h2 className="subtitle">
+            Choose a theme, a level, and start guessing!
+          </h2>
           <ThemeSelect
             selectedTheme={theme}
             themes={Themes}
