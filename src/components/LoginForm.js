@@ -20,7 +20,7 @@ const LoginForm = ({ setEmailCallback }) => {
       <section>
         <div>
           <label id="label" htmlFor="email">
-            {"Enter email address to track your results "}
+            {"Enter a username to track your results "}
           </label>
           <input
             name="email"
