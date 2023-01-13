@@ -20,7 +20,6 @@ const Performance = ({ performance, gameOver, playNum, seqNum }) => {
       );
     }
   };
-
   return (
     <div id="performance">
       {gameOver || (seqNum == 0 && playNum == 0) ? performanceButton() : ""}
