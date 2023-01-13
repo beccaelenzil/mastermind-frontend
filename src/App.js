@@ -58,6 +58,11 @@ function App() {
   }, []);
 
   useEffect(() => {
+    const localEmail = localStorage.getItem("email");
+    console.log(localEmail);
+    if (localEmail) {
+      setEmail(localEmail);
+    }
     axios
       .post(URL + "users/login", { email: email })
       .then((response) => {
