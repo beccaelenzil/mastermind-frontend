@@ -2,3 +2,18 @@
     font-style: italic;
     font-family: serif
 }
+
+.loggedIn {
+    display: flex;
+    flex-direction: row;
+}
+
+.loggedIn-items {
+    align-items: center;
+    padding: 5px;
+}
+
+#logoutButton {
+    font-size: 0.5em
+}
+

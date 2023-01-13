@@ -3,9 +3,11 @@
     flex-direction: row;
     flex-wrap: wrap; 
     background-color:#008CBA;
-    border-radius: 0.5em
+    border-radius: 0.5em;
+    font-size: 0.8em
 }
 
 .stat {
-    margin: 0.5em
+    margin: 0.5em;
+    
 }
