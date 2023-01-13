@@ -20,19 +20,25 @@ const CodeButtons = ({
       </button>
     );
   }
-  emojis.push(
+  const enterDeleteButtons = [];
+  enterDeleteButtons.push(
     <button className="enter-button" onClick={enterCallback} key={1000}>
       ENTER
     </button>
   );
 
-  emojis.push(
+  enterDeleteButtons.push(
     <button className="enter-button" onClick={deleteCallback} key={2000}>
       DELETE
     </button>
   );
 
-  return <div>{emojis}</div>;
+  return (
+    <div>
+      <div>{emojis}</div>
+      <div>{enterDeleteButtons}</div>
+    </div>
+  );
 };
 
 export default CodeButtons;

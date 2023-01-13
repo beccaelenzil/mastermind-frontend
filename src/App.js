@@ -29,7 +29,7 @@ function App() {
   const [performance, setPerformance] = useState({});
   const [guess, setGuess] = useState("");
   const [email, setEmail] = useState("");
-  const [userId, setUserId] = useState(null);
+  const [userId, setUserId] = useState(0);
   const [theme, setTheme] = useState("hearts");
   const [level, setLevel] = useState("standard");
   const [playNum, setPlayNum] = useState(0);
@@ -45,6 +45,7 @@ function App() {
   const [win, setWin] = useState(false);
   const [code, setCode] = useState("XXXX");
   const [gameNum, setGameNum] = useState(0);
+  const [displayCodeButtons, setDisplayCodeButtons] = useState(true);
 
   useEffect(() => {
     axios
@@ -84,6 +85,14 @@ function App() {
   }, [userId, gameNum]);
 
   const getCodeScore = () => {
+    if (code == guess) {
+      setWin(true);
+      setPlayNum(numTurns + 1);
+      setDisplayCodeButtons(false);
+    } else if (guess != code && playNum == numTurns - 1) {
+      setDisplayCodeButtons(false);
+      setPlayNum(numTurns + 1);
+    }
     axios
       .post(URL + "plays/", {
         code: guess,
@@ -95,12 +104,6 @@ function App() {
         scorePlay(response.data.correct_nums, response.data.correct_pos);
         if (gameId == 0) {
           setGameId(response.data.game_id);
-        }
-        if (response.data.win == true) {
-          setWin(true);
-          setPlayNum(numTurns + 1);
-        } else if (response.data.win == false && playNum == numTurns) {
-          setPlayNum(numTurns + 1);
         }
       })
       .catch((err) => console.log(err.response.data));
@@ -160,6 +163,7 @@ function App() {
     setGameId(0);
     setCode("XXXX");
     setGameNum(gameNum + 1);
+    setDisplayCodeButtons(true);
   };
 
   const updateLevel = (newLevel) => {
@@ -209,23 +213,30 @@ function App() {
         setEmail={setEmail}
         seqNum={seqNum}
         ThemeSelect={ThemeSelect}
-        win={win}
+        guess={guess}
         code={code}
         performance={performance}
+        win={win}
       />
 
       <Instructions />
       <GameBoard gameBoard={gameBoard} playNum={playNum} />
+
       <div className="App-buttons">
-        <CodeButtons
-          theme={Themes[theme]}
-          numKeys={numKeys}
-          seq={seqNum}
-          updateGameBoardCallback={updateSymbols}
-          enterCallback={enterCode}
-          deleteCallback={deleteSymbol}
-        />
+        {displayCodeButtons ? (
+          <CodeButtons
+            theme={Themes[theme]}
+            numKeys={numKeys}
+            seq={seqNum}
+            updateGameBoardCallback={updateSymbols}
+            enterCallback={enterCode}
+            deleteCallback={deleteSymbol}
+          />
+        ) : (
+          ""
+        )}
       </div>
+
       <footer>Becca Elenzil - January 2023</footer>
     </div>
   );
