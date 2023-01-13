@@ -182,16 +182,8 @@ function App() {
     }
   };
 
-  const google = () => {
-    axios
-      .get(`${URL}login`, { withCredentials: true })
-      .then((response) => console.log("log in ", response))
-      .catch((err) => console.log(err));
-  };
-
   return (
     <div className="App">
-      <button onClick={google}>Google Login</button>
       <GameHeader
         Themes={Themes}
         theme={theme}
@@ -225,6 +217,7 @@ function App() {
             updateGameBoardCallback={updateSymbols}
             enterCallback={getCodeScore}
             deleteCallback={deleteSymbol}
+            gameOver={gameOver}
           />
         ) : (
           ""
