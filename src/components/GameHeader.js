@@ -1,6 +1,6 @@
 import WelcomePlaying from "./WelcomePlaying.js";
 import UserHeading from "./UserHeading.js";
-import Display from "../utils/DisplayFunctions.js";
+import GameOutcome from "./GameOutcome.js";
 import "./GameHeader.css";
 
 const GameHeader = ({
@@ -42,16 +42,13 @@ const GameHeader = ({
         seqNum={seqNum}
         performance={performance}
       />
-
-      {win ? <h1>YOU WON!</h1> : ""}
-      {!win && gameOver ? (
-        <h1>
-          You ran out of turns! The code was:{" "}
-          {Display.displayCode(Themes, theme, code)}
-        </h1>
-      ) : (
-        ""
-      )}
+      <GameOutcome
+        win={win}
+        Themes={Themes}
+        theme={theme}
+        code={code}
+        gameOver={gameOver}
+      ></GameOutcome>
     </header>
   );
 };

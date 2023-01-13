@@ -202,7 +202,6 @@ function App() {
         email={email}
         setEmail={setEmail}
         seqNum={seqNum}
-        ThemeSelect={ThemeSelect}
         guess={guess}
         code={code}
         performance={performance}
