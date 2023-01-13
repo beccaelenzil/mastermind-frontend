@@ -184,7 +184,7 @@ function App() {
 
   const google = () => {
     axios
-      .get(`${URL}login`)
+      .get(`${URL}login`, { withCredentials: true })
       .then((response) => console.log("log in ", response))
       .catch((err) => console.log(err));
   };
