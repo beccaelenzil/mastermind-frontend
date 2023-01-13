@@ -24,7 +24,7 @@ const Performance = ({ performance, gameOver, playNum, seqNum }) => {
   return (
     <div id="performance">
       {gameOver || (seqNum == 0 && playNum == 0) ? performanceButton() : ""}
-      {display ? (
+      {display && (gameOver || (seqNum == 0 && playNum == 0)) ? (
         <div className="stats">
           <h1 className="stat">Games won: {performance["Games won"]}</h1>
           <h1 className="stat">Total Games: {performance["Total games"]}</h1>
