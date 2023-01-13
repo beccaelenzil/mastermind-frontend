@@ -77,7 +77,7 @@ const GameHeader = ({
         ""
       )}
       {win ? <h1>YOU WON!</h1> : ""}
-      {!false && gameOver ? (
+      {!win && gameOver ? (
         <h1>
           You ran out of turns! The code was:{" "}
           {Display.displayCode(Themes, theme, code)}
