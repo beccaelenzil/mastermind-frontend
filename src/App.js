@@ -80,7 +80,7 @@ function App() {
       .catch((err) =>
         console.log("Couldn't set performance summary for user_id: ", userId)
       );
-  }, [userId, gameNum]);
+  }, [userId, gameNum, gameOver]);
 
   const getCodeScore = () => {
     axios
