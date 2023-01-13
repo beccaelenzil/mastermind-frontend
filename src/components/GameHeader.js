@@ -51,7 +51,8 @@ const GameHeader = ({
             </p>
             {playNum < numTurns ? (
               <p>
-                Play Number: <span className="smaller">{playNum + 1}</span>
+                Guesses Remaining:{" "}
+                <span className="smaller">{numTurns - playNum}</span>
               </p>
             ) : (
               ""
