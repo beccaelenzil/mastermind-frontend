@@ -18,10 +18,10 @@ const GameHeader = ({
   setEmail,
   seqNum,
   ThemeSelect,
-  guess,
   code,
   performance,
   win,
+  gameOver,
 }) => {
   return (
     <header className="App-buttons" id="App-heading">
@@ -77,7 +77,7 @@ const GameHeader = ({
         ""
       )}
       {win ? <h1>YOU WON!</h1> : ""}
-      {playNum == numTurns && code != guess && !win ? (
+      {!false && gameOver ? (
         <h1>
           You ran out of turns! The code was:{" "}
           {Display.displayCode(Themes, theme, code)}

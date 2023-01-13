@@ -26,26 +26,29 @@ function App() {
     return board;
   };
 
-  const [performance, setPerformance] = useState({});
-  const [guess, setGuess] = useState("");
-  const [email, setEmail] = useState("");
-  const [userId, setUserId] = useState(0);
-  const [theme, setTheme] = useState("hearts");
-  const [level, setLevel] = useState("standard");
-  const [playNum, setPlayNum] = useState(0);
-  const [seqNum, setSeqNum] = useState(0);
+  // game parameters
   const [numKeys, setNumKeys] = useState(8);
   const [numTurns, setNumTurns] = useState(10);
   const [codeLength, setCodeLength] = useState(4);
+  const [theme, setTheme] = useState("hearts");
+  const [level, setLevel] = useState("standard");
+  const [levelInfo, setLevelInfo] = useState({});
+  // game play
+  const [playNum, setPlayNum] = useState(0);
+  const [seqNum, setSeqNum] = useState(0);
+  const [guess, setGuess] = useState("");
   const [gameBoard, setGameBoard] = useState(
     makeGameBoard(codeLength, numTurns)
   );
-  const [gameId, setGameId] = useState(0);
-  const [levelInfo, setLevelInfo] = useState({});
+  const [gameId, setGameId] = useState(null);
   const [win, setWin] = useState(false);
   const [code, setCode] = useState("XXXX");
   const [gameNum, setGameNum] = useState(0);
-  const [displayCodeButtons, setDisplayCodeButtons] = useState(true);
+  const [gameOver, setGameOver] = useState(false);
+  //user
+  const [email, setEmail] = useState("");
+  const [userId, setUserId] = useState(null);
+  const [performance, setPerformance] = useState({});
 
   useEffect(() => {
     axios
@@ -53,18 +56,6 @@ function App() {
       .then((response) => setLevelInfo(response.data))
       .catch((err) => console.log(err.response.data));
   }, []);
-
-  //TODO: refactor using useRef so it doesn't run on initial render
-  useEffect(() => {
-    axios
-      .get(URL + "games/" + gameId)
-      .then((response) => {
-        if (response.status == 200) {
-          setCode(response.data.code);
-        }
-      })
-      .catch((err) => console.log(err.response.data));
-  }, [gameId]);
 
   useEffect(() => {
     axios
@@ -81,18 +72,12 @@ function App() {
       .then((response) => {
         setPerformance(response.data["performance summary"]);
       })
-      .catch((err) => console.log(err));
+      .catch((err) =>
+        console.log("Couldn't set performance summary for user_id: ", userId)
+      );
   }, [userId, gameNum]);
 
   const getCodeScore = () => {
-    if (code == guess) {
-      setWin(true);
-      setPlayNum(numTurns + 1);
-      setDisplayCodeButtons(false);
-    } else if (guess != code && playNum == numTurns - 1) {
-      setDisplayCodeButtons(false);
-      setPlayNum(numTurns + 1);
-    }
     axios
       .post(URL + "plays/", {
         code: guess,
@@ -101,15 +86,24 @@ function App() {
         user_id: userId,
       })
       .then((response) => {
-        scorePlay(response.data.correct_nums, response.data.correct_pos);
-        if (gameId == 0) {
+        addScoreToBoard(response.data.correct_nums, response.data.correct_pos);
+        setPlayNum(playNum + 1);
+        setSeqNum(0);
+        setGuess("");
+        setWin(response.data.win);
+        if (response.data.win || playNum == numTurns - 1) {
+          setGameOver(true);
+          setCode(response.data.answer);
+          setPlayNum(numTurns + 1);
+        }
+        if (!gameId) {
           setGameId(response.data.game_id);
         }
       })
       .catch((err) => console.log(err.response.data));
   };
 
-  const scorePlay = (count_num, count_pos) => {
+  const addScoreToBoard = (count_num, count_pos) => {
     const rowLength = gameBoard[0].length;
     const newGameBoard = [];
     for (let i = 0; i < numTurns; i++) {
@@ -163,7 +157,7 @@ function App() {
     setGameId(0);
     setCode("XXXX");
     setGameNum(gameNum + 1);
-    setDisplayCodeButtons(true);
+    setGameOver(false);
   };
 
   const updateLevel = (newLevel) => {
@@ -188,15 +182,6 @@ function App() {
     }
   };
 
-  const enterCode = () => {
-    if (guess.length == codeLength && playNum < numTurns) {
-      getCodeScore();
-      setPlayNum(playNum + 1);
-      setSeqNum(0);
-      setGuess("");
-    }
-  };
-
   return (
     <div className="App">
       <GameHeader
@@ -217,19 +202,20 @@ function App() {
         code={code}
         performance={performance}
         win={win}
+        gameOver={gameOver}
       />
 
       <Instructions />
       <GameBoard gameBoard={gameBoard} playNum={playNum} />
 
       <div className="App-buttons">
-        {displayCodeButtons ? (
+        {!gameOver ? (
           <CodeButtons
             theme={Themes[theme]}
             numKeys={numKeys}
             seq={seqNum}
             updateGameBoardCallback={updateSymbols}
-            enterCallback={enterCode}
+            enterCallback={getCodeScore}
             deleteCallback={deleteSymbol}
           />
         ) : (
