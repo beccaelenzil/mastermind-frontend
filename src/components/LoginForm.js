@@ -9,7 +9,6 @@ const LoginForm = ({ setEmailCallback }) => {
 
     setEmailCallback(email);
     localStorage.setItem("email", email);
-    setEmail("");
   };
 
   const handleChange = (e) => {
