@@ -2,20 +2,28 @@ import { useState } from "react";
 import "./Instructions.css";
 import "./Performance.css";
 
-const Performance = ({ performance }) => {
+const Performance = ({ performance, gameOver, playNum, seqNum }) => {
   const [display, setDisplay] = useState(false);
 
-  return (
-    <div id="performance">
-      {!display ? (
+  const performanceButton = () => {
+    if (!display) {
+      return (
         <button className="toggle-button" onClick={() => setDisplay(true)}>
           Show Performance
         </button>
-      ) : (
+      );
+    } else {
+      return (
         <button className="toggle-button" onClick={() => setDisplay(false)}>
           Hide Performance
         </button>
-      )}
+      );
+    }
+  };
+
+  return (
+    <div id="performance">
+      {gameOver || (seqNum == 0 && playNum == 0) ? performanceButton() : ""}
       {display ? (
         <div className="stats">
           <h1 className="stat">Games won: {performance["Games won"]}</h1>

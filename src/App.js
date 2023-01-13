@@ -47,7 +47,7 @@ function App() {
   const [gameOver, setGameOver] = useState(false);
   //user
   const [email, setEmail] = useState("");
-  const [userId, setUserId] = useState(null);
+  const [userId, setUserId] = useState(0);
   const [performance, setPerformance] = useState({});
 
   useEffect(() => {

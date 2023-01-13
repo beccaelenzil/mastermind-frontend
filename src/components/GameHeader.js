@@ -41,6 +41,7 @@ const GameHeader = ({
         setEmail={setEmail}
         seqNum={seqNum}
         performance={performance}
+        gameOver={gameOver}
       />
       <GameOutcome
         win={win}
