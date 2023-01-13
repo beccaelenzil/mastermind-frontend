@@ -3,17 +3,20 @@
     font-family: serif
 }
 
-.loggedIn {
+#logged-in {
     display: flex;
     flex-direction: row;
+    margin: 0.5em
 }
 
-.loggedIn-items {
+.logged-in-item {
     align-items: center;
     padding: 5px;
 }
 
-#logoutButton {
-    font-size: 0.5em
+#logout-button {
+    font-size: 0.5em;
+    margin: 0.2em
 }
+
 

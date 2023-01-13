@@ -6,7 +6,7 @@ const Performance = ({ performance }) => {
   const [display, setDisplay] = useState(false);
 
   return (
-    <div>
+    <div id="performance">
       {!display ? (
         <button className="toggle-button" onClick={() => setDisplay(true)}>
           Show Performance

@@ -1,6 +1,5 @@
-import LevelSelect from "./LevelSelect.js";
-import LoginForm from "./LoginForm.js";
-import Performance from "./Performance.js";
+import WelcomePlaying from "./WelcomePlaying.js";
+import UserHeading from "./UserHeading.js";
 import Display from "../utils/DisplayFunctions.js";
 import "./GameHeader.css";
 
@@ -17,7 +16,6 @@ const GameHeader = ({
   email,
   setEmail,
   seqNum,
-  ThemeSelect,
   code,
   performance,
   win,
@@ -25,58 +23,26 @@ const GameHeader = ({
 }) => {
   return (
     <header className="App-buttons" id="App-heading">
-      {seqNum == 0 && playNum == 0 ? (
-        <div>
-          <h1>Welcome to MASTERMIND</h1>
-          <h2 className="subtitle">
-            Choose a theme, a level, and start guessing!
-          </h2>
-          <ThemeSelect
-            selectedTheme={theme}
-            themes={Themes}
-            setThemeCallback={setTheme}
-          />
-          <LevelSelect
-            selectedLevel={level}
-            levels={Object.keys(levelInfo)}
-            setLevelCallback={updateLevel}
-          />
-        </div>
-      ) : (
-        <div>
-          <h1>Currently Playing MASTERMIND</h1>
-          <h2>
-            <p>
-              Level: <span className="smaller">{level}</span>
-            </p>
-            {playNum < numTurns ? (
-              <p>
-                Guesses Remaining:{" "}
-                <span className="smaller">{numTurns - playNum}</span>
-              </p>
-            ) : (
-              ""
-            )}
-          </h2>
-          <button className="new-game-button" onClick={restart}>
-            Start New Game
-          </button>
-        </div>
-      )}
-      {email != "" && playNum == 0 && seqNum == 0 ? (
-        <div>
-          <h1>Logged in as {email}</h1>
-          <Performance performance={performance} />
-          <button onClick={() => setEmail("")}>Logout</button>
-        </div>
-      ) : (
-        ""
-      )}
-      {email == "" && playNum == 0 && seqNum == 0 ? (
-        <LoginForm setEmailCallback={setEmail} />
-      ) : (
-        ""
-      )}
+      <WelcomePlaying
+        Themes={Themes}
+        theme={theme}
+        setTheme={setTheme}
+        level={level}
+        levelInfo={levelInfo}
+        updateLevel={updateLevel}
+        playNum={playNum}
+        numTurns={numTurns}
+        restart={restart}
+        seqNum={seqNum}
+      />
+      <UserHeading
+        playNum={playNum}
+        email={email}
+        setEmail={setEmail}
+        seqNum={seqNum}
+        performance={performance}
+      />
+
       {win ? <h1>YOU WON!</h1> : ""}
       {!win && gameOver ? (
         <h1>
