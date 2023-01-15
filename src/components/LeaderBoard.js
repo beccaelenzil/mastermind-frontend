@@ -29,7 +29,7 @@ const LeaderBoard = () => {
   }, [display]);
 
   const makeLeaderList = () => {
-    const wins = [<h1>Leader Board</h1>];
+    const wins = [<h1>Leader Board</h1>, <h2>Username - Wins</h2>];
     for (const user of users) {
       if (user.username != "") {
         wins.push(
