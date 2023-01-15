@@ -8,6 +8,7 @@ import Constants from "./Constants.js";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import GameHeader from "./components/GameHeader";
+import LeaderBoard from "./components/LeaderBoard";
 
 function App() {
   const URL = Constants.url;
@@ -210,6 +211,7 @@ function App() {
       />
 
       <Instructions />
+      <LeaderBoard />
       <GameBoard gameBoard={gameBoard} playNum={playNum} />
 
       <div className="App-buttons">
