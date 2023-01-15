@@ -23,7 +23,6 @@ const LeaderBoard = () => {
       .get(URL + "users/")
       .then((response) => {
         setUsers(sortByKey(response.data, "wins"));
-        console.log(response.data);
       })
       .catch((err) => console.log(err.response.data));
   }, [display]);
