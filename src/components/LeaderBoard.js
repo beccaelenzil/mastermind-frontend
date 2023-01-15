@@ -4,7 +4,7 @@ import axios from "axios";
 import Constants from "../Constants.js";
 import "./LeaderBoard.css";
 
-const LeaderBoard = () => {
+const LeaderBoard = ({ gameOver }) => {
   const URL = Constants.url;
   const [display, setDisplay] = useState(false);
   const [users, setUsers] = useState([]);
@@ -25,7 +25,7 @@ const LeaderBoard = () => {
         setUsers(sortByKey(response.data, "wins"));
       })
       .catch((err) => console.log(err.response.data));
-  }, [display]);
+  }, [display, gameOver]);
 
   const makeLeaderList = () => {
     const wins = [

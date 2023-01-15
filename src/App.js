@@ -211,7 +211,7 @@ function App() {
       />
 
       <Instructions />
-      <LeaderBoard />
+      <LeaderBoard gameOver={gameOver} />
       <GameBoard gameBoard={gameBoard} playNum={playNum} />
 
       <div className="App-buttons">
