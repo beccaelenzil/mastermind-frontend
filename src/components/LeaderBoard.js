@@ -34,7 +34,7 @@ const LeaderBoard = () => {
     for (const user of users) {
       if (user.username != "") {
         usernames.push(<td>{user.username}</td>);
-        usernames.push(<td>{user.wins}</td>);
+        wins.push(<td>{user.wins}</td>);
       }
     }
     return (
