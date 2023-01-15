@@ -1,0 +1,17 @@
+table {
+    border-collapse: collapse;
+    margin: 0.1em;
+    font-size: 1em;
+    font-family: sans-serif;
+    min-width: 20vw;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    background-color: rgb(81, 120, 178);
+    border-radius: 0.5em
+}
+
+td, th {
+    padding: 0.2em;
+}
+
+
+    

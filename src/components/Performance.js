@@ -25,9 +25,9 @@ const Performance = ({ performance, gameOver, playNum, seqNum }) => {
       {gameOver || (seqNum == 0 && playNum == 0) ? performanceButton() : ""}
       {display && (gameOver || (seqNum == 0 && playNum == 0)) ? (
         <div className="stats">
-          <h1 className="stat">Games won: {performance["Games won"]}</h1>
-          <h1 className="stat">Total Games: {performance["Total games"]}</h1>
-          <h1 className="stat">Win Percentage: {performance["Win %"]}%</h1>
+          <h1 className="stat">Wins: {performance["Wins"]}</h1>
+          <h1 className="stat">Total Games: {performance["Total Games"]}</h1>
+          <h1 className="stat">Win %: {performance["Win %"]}%</h1>
           <h1 className="stat">Win Streak: {performance["Win Streak"]}</h1>
         </div>
       ) : (
