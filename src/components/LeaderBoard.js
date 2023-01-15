@@ -29,24 +29,18 @@ const LeaderBoard = () => {
   }, [display]);
 
   const makeLeaderList = () => {
-    const usernames = [];
-    const wins = [];
+    const wins = [<h1>Leader Board</h1>];
     for (const user of users) {
       if (user.username != "") {
-        usernames.push(<td>{user.username}</td>);
-        wins.push(<td>{user.wins}</td>);
+        wins.push(
+          <li className="leaderBoardItem" key={user.uid}>
+            <span className="name">{user.username} </span> -
+            <span className="win"> {user.wins}</span>
+          </li>
+        );
       }
     }
-    return (
-      <table>
-        <tr>
-          <th>username</th>
-          <th>wins</th>
-        </tr>
-        <tr>{usernames}</tr>
-        <tr>{wins}</tr>
-      </table>
-    );
+    return wins;
   };
 
   return (
@@ -62,7 +56,7 @@ const LeaderBoard = () => {
       )}
       {display ? (
         <section className="game-body">
-          <div id="rules-text">{makeLeaderList()}</div>
+          <ol id="leader-board">{makeLeaderList()}</ol>
         </section>
       ) : (
         ""
