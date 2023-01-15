@@ -1,7 +1,9 @@
 #leader-board {
     background-color: rgb(81, 120, 178);
     border-radius: 0.5em;
-    padding: 2em;
+    padding-left: 2em;
+    padding-right: 2em;
+    padding: 0.5em;
     margin: 1em;
     min-width: 15vw
 }
