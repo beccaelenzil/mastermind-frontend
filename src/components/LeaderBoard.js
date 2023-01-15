@@ -30,9 +30,9 @@ const LeaderBoard = () => {
   const makeLeaderList = () => {
     const wins = [
       <li id="leaderBoardHeading" className="leaderBoardItem" key={0}>
-        <span className="rank">Rank</span>
-        <span className="name">Username</span>
-        <span className="win">Wins</span>
+        <span className="gridItem">Rank</span>
+        <span className="gridItem">Username</span>
+        <span className="gridItem">Wins</span>
       </li>,
     ];
     let i = 1;
@@ -40,9 +40,9 @@ const LeaderBoard = () => {
       if (user.username != "") {
         wins.push(
           <li className="leaderBoardItem" key={user.uid}>
-            <span className="rank">{i}</span>
-            <span className="name">{user.username}</span>
-            <span className="win"> {user.wins}</span>
+            <span className="gridItem">{i}</span>
+            <span className="gridItem">{user.username}</span>
+            <span className="gridItem"> {user.wins}</span>
           </li>
         );
         i += 1;
