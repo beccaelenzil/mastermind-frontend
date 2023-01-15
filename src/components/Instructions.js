@@ -32,18 +32,22 @@ const Instructions = () => {
             are guessed correctly and in the correct position. Below are a few
             example games.
           </p>
-          <div class="example-games">
+          <div className="example-games">
             <img
-              class="example"
+              className="example"
               alt="animals easy level - won in 4 turns"
               src={animals}
             />
             <img
-              class="example"
+              className="example"
               alt="hearts standard level - won in 9 turns"
               src={hearts}
             />
-            <img class="example" alt="faces hard level - loss" src={faces} />
+            <img
+              className="example"
+              alt="faces hard level - loss"
+              src={faces}
+            />
           </div>
         </section>
       ) : (
