@@ -128,7 +128,6 @@ function App() {
     setGameBoard(newGameBoard);
   };
 
-  //TODO: change variable i to more meaningful name and remove overwrite
   const updateSymbols = (emoji, seq, button) => {
     const rowLength = gameBoard[0].length;
     if (
