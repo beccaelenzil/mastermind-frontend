@@ -128,11 +128,12 @@ function App() {
     setGameBoard(newGameBoard);
   };
 
-  const updateSymbols = (emoji, seq, i) => {
+  //TODO: change variable i to more meaningful name and remove overwrite
+  const updateSymbols = (emoji, seq, button) => {
     const rowLength = gameBoard[0].length;
     if (
       guess.length < codeLength ||
-      (guess.length == codeLength && i == "delete")
+      (guess.length == codeLength && button == "delete")
     ) {
       const newGameBoard = [];
       for (let i = 0; i < numTurns; i++) {
@@ -148,8 +149,8 @@ function App() {
       }
       setGameBoard(newGameBoard);
       setSeqNum(seqNum + 1);
-      if (i != "delete") {
-        setGuess(guess + String(i));
+      if (button != "delete") {
+        setGuess(guess + String(button));
       }
     }
   };
